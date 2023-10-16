@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.psi.addRemoveModifier.addModifier
+
 /*
  * Copyright (c) 2021 Touchlab
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
@@ -119,6 +121,10 @@ kotlin {
                 else -> nativeMain
             }
         )
+
+        if (konanTarget.family.isAppleFamily) {
+            compilations.getByName("main").cinterops.create("ios_log")
+        }
 
         testSourceSet.dependsOn(
             if (konanTarget.family.isAppleFamily) {

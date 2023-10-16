@@ -1,0 +1,14 @@
+package = co.touchlab.kermit.darwin
+---
+
+#include <os/log.h>
+
+typedef void* darwin_os_log_t;
+
+darwin_os_log_t darwin_log_create(const char *subsystem, const char *category) {
+    return os_log_create(subsystem, category);
+}
+
+void darwin_log_with_type(darwin_os_log_t log, os_log_type_t type, const char *msg) {
+    os_log_with_type((os_log_t)log, type, "%s", msg);
+}
